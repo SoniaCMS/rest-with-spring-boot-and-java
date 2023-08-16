@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.sonia.exceptions.ExceptionResponse;
-import br.com.sonia.exceptions.UnsupportedMathOperationException;
+import br.com.sonia.exceptions.UnsupportedPersonOperationException;
 
 @ControllerAdvice
 @RestController
@@ -26,7 +26,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(UnsupportedMathOperationException.class)
+	@ExceptionHandler(UnsupportedPersonOperationException.class)
 	public final ResponseEntity<ExceptionResponse> handleBadRequestException(Exception ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
 				new Date(), 
