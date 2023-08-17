@@ -20,10 +20,9 @@ import br.com.sonia.services.PersonServices;
 @RestController
 @RequestMapping("/person")
 public class PersonController {
-
+	
 	@Autowired
 	private PersonServices service;
-	//É o mesmo que private PersonServices service = new PersonServices();
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<PersonVO> findAll() {
@@ -31,26 +30,27 @@ public class PersonController {
 	}
 	
 	@GetMapping(value = "/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO findById(@PathVariable(value = "id") Long id){	
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO create(@RequestBody PersonVO Person){	
-		return service.create(Person);
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonVO create(@RequestBody PersonVO person) {
+		return service.create(person);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-	public PersonVO update(@RequestBody PersonVO person){	
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonVO update(@RequestBody PersonVO person) {
 		return service.update(person);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){	
-		 service.delete(id);
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }
