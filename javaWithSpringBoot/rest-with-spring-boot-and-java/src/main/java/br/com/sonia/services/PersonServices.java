@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.sonia.data.vo.v1.PersonVO;
+import br.com.sonia.data.vo.v2.PersonVOV2;
 import br.com.sonia.exceptions.ResourceNotFoundException;
 import br.com.sonia.mapper.DozerMapper;
+import br.com.sonia.mapper.custom.PersonMapper;
 import br.com.sonia.model.Person;
 import br.com.sonia.repositories.PersonRepository;
 
@@ -19,6 +21,8 @@ public class PersonServices {
 	
 	@Autowired
 	PersonRepository repository;
+	
+	PersonMapper mapper;
 	
 	public List<PersonVO> findAll() {
 		
@@ -46,6 +50,14 @@ public class PersonServices {
 		return vo;
 	}
 	
+	public PersonVOV2 createV2(PersonVOV2 person) {
+		
+		logger.info("Creating one person with V2!");
+		var entity = mapper.convertVoTOEntity(person);
+		var vo =  mapper.convertEntityToVo(repository.save(entity));
+		return vo;
+	}
+	
 	public PersonVO update(PersonVO person) {
 		
 		logger.info("Updating one person!");
@@ -70,4 +82,5 @@ public class PersonServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records for this ID!"));
 		repository.delete(entity);
 	}
+
 }
