@@ -11,22 +11,22 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 
-		configurer.favorParameter(true)
+		/*	configurer.favorParameter(true)
 		      .parameterName("mediaType").ignoreAcceptHeader(true)
 		      .useRegisteredExtensionsOnly(false)
 		      .defaultContentType(MediaType.APPLICATION_JSON)
 		      .mediaType("json",MediaType.APPLICATION_JSON)
 		      .mediaType("xml",MediaType.APPLICATION_XML);
-	}
+	}*/
 	
 		
-	/*//Chamada via header
+	//Chamada via header
 	configurer.favorParameter(false)
     .ignoreAcceptHeader(false)
     .useRegisteredExtensionsOnly(false)
     .defaultContentType(MediaType.APPLICATION_JSON)
     .mediaType("json",MediaType.APPLICATION_JSON)
     .mediaType("xml",MediaType.APPLICATION_XML);
-}*/
+}
 
 }
