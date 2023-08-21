@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.sonia.controllers.PersonController;
 import br.com.sonia.data.vo.v1.PersonVO;
+import br.com.sonia.exceptions.RequiredObjectIsNullException;
 import br.com.sonia.exceptions.ResourceNotFoundException;
 import br.com.sonia.mapper.DozerMapper;
 import br.com.sonia.model.Person;
@@ -47,6 +48,8 @@ public class PersonServices {
 	
 	public PersonVO create(PersonVO person) {
 		
+		if (person == null) throw new RequiredObjectIsNullException();
+		
 		logger.info("Creating one person!");
 		
 		var entity = DozerMapper.parseObject(person, Person.class);
@@ -56,6 +59,8 @@ public class PersonServices {
 	}
 	
 	public PersonVO update(PersonVO person) {
+		
+		if (person == null) throw new RequiredObjectIsNullException();
 		
 		logger.info("Updating one person!");
 		
